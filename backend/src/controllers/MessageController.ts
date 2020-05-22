@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 class MessageController {
 
   public async create(req: Request, res: Response) {
-    const { title, content} = req.body
+    const { title, content } = req.body
     const userId = req.params
 
 
@@ -16,7 +16,7 @@ class MessageController {
         content,
         user: {
           connect: {
-            id : Number(userId)
+            id: Number(userId)
           }
         }
       }
@@ -26,15 +26,26 @@ class MessageController {
 
   }
 
-  public async findAll(req: Request, res: Response){
+  public async findAll(req: Request, res: Response) {
     const userId = req.params
 
     const messages = await prisma.message.findMany({
-      where : {userId : userId}
+      where: { userId: userId }
     })
 
     res.json(messages)
 
+  }
+
+  //Melhorar function
+  public async delete(req: Request, res: Response) {
+    const { id } = req.params
+    await prisma.message.delete({
+      where : {id : Number(id)}
+    })
+
+      res.status(200)
+    
   }
 
 }

@@ -32,8 +32,8 @@ main()
   }
 
   function messageRoutes(){
-    app.post('/message/:id', MessageController.create)
-    app.get('/message/:id', MessageController.findAll)
+    app.post('/message/:userid', MessageController.create)
+    app.get('/message/:userid', MessageController.findAll)
   }
 
   
