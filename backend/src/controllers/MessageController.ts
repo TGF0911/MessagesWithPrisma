@@ -22,30 +22,40 @@ class MessageController {
       }
     })
 
-    res.json(message)
+    return res.json(message)
 
   }
 
-  public async findAll(req: Request, res: Response) {
+  public async findTitle(req: Request, res: Response) {
+    const { title } = req.body
+
+    const message = await prisma.message.findOne({
+      where: { title: title }
+    })
+    return res.json(message)
+  }
+
+  public async findAllUser(req: Request, res: Response) {
     const userId = req.params
 
     const messages = await prisma.message.findMany({
       where: { userId: userId }
     })
 
-    res.json(messages)
+    return res.json(messages)
 
   }
 
   //Melhorar function
   public async delete(req: Request, res: Response) {
     const { id } = req.params
+
     await prisma.message.delete({
-      where : {id : Number(id)}
+      where: { id: Number(id) }
     })
 
-      res.status(200)
-    
+    return res.status(200)
+
   }
 
 }
