@@ -15,7 +15,7 @@ class SessionController{
       }
     })
     if(!user){
-      res.status(400).json({'User not found.': text}) 
+      res.status(400).json({'User not found.' : text}) 
     }
 
       return res.json(user)
